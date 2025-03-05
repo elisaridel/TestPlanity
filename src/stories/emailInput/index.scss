@@ -1,5 +1,122 @@
 @use '../../scss/config/' as *;
 
-.input-email--component {
-	background-color: var(--text-primary);
+.input-email {
+	display: flex;
+	flex-direction: column;
+	gap: convertPxToREM(6);
+
+	&__is-successful {
+		.input-email {
+			&__field {
+				border: convertPxToREM(2) solid var(--border-brand);
+			}
+		}
+	}
+
+	&__has-error {
+		.input-email {
+			&__field {
+				border: convertPxToREM(1) solid var(--border-error);
+			}
+
+			&__hint {
+				color: var(--text-error-primary);
+			}
+		}
+	}
+
+	&__is-disabled {
+		.input-email {
+			&__field {
+				border: convertPxToREM(1) solid var(--border-disabled);
+				background-color: var(--bg-disabled);
+
+				&::placeholder {
+					color: var(--text-disabled);
+				}
+			}
+
+			&__icon {
+				path {
+					stroke: var(--fg-quinary);
+				}
+			}
+		}
+	}
+
+	&__label {
+		color: var(--text-secondary);
+		font-weight: 500;
+		font-size: $font-size-sm;
+		line-height: $line-height-sm;
+
+		&-required {
+			color: var(--text-brand-primary);
+		}
+	}
+
+	&__field-container {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+
+	&__icon {
+		position: absolute;
+		left: convertPxToREM(12);
+		width: convertPxToREM(24);
+		height: convertPxToREM(24);
+
+		path {
+			stroke: var(--fg-tertiary);
+		}
+	}
+
+	&__field {
+		background-color: var(--bg-primary);
+		border: convertPxToREM(1) solid var(--border-primary);
+		box-shadow: 0px 1px 2px 0px var(--shadow-xs);
+		padding: $spacing-md convertPxToREM(40) $spacing-md convertPxToREM(44);
+		border-radius: $radius-md;
+		line-height: $line-height-md;
+		color: var(--text-primary);
+		font-weight: 400;
+		font-size: $font-size-md;
+		height: convertPxToREM(40);
+
+		&::placeholder {
+			color: var(--text-placeholder);
+			font-size: $font-size-md;
+			line-height: $line-height-md;
+			font-weight: 400;
+		}
+	}
+
+	&__hint {
+		color: var(--text-tertiary);
+		font-size: $font-size-sm;
+		line-height: $line-height-sm;
+		font-weight: 400;
+	}
+
+	&__big {
+		.input-email {
+			&__label {
+				font-size: $font-size-md;
+				line-height: $font-size-md;
+			}
+
+			&__field {
+				height: convertPxToREM(52);
+				padding: $spacing-lg convertPxToREM(44) $spacing-lg
+					convertPxToREM(48);
+				
+			}
+
+			&__icon {
+				width: convertPxToREM(28);
+				height: convertPxToREM(28);
+			}
+		}
+	}
 }

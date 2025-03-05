@@ -10,6 +10,9 @@ $color-light-tertiary: #94979c;
 $color-dark-brand: #079455;
 $color-light-brand: #94979c;
 
+$color-dark-disabled: #717680;
+$color-light-disabled: #85888e;
+
 $color-dark-placeholder: #717680;
 $color-light-placeholder: #85888e;
 
@@ -64,6 +67,7 @@ $color-light-shadow-xs: #0a0d120d;
 			$color-dark-error-primary,
 			$color-light-error-primary
 		)};
+	--text-disabled: #{light-dark($color-dark-disabled, $color-light-disabled)};
 
 	--fg-tertiary: #{light-dark(
 			$color-dark-fg-tertiary,

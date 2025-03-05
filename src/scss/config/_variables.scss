@@ -1,0 +1,12 @@
+@use './functions' as *;
+
+// FONTS
+$font-family-body: 'Inter', sans-serif;
+
+// FONTS SIZES
+$font-size-sm: convertPxToREM(14);
+$font-size-md: convertPxToREM(16);
+
+// LINE HEIGHT
+$line-height-sm: convertPxToREM(20);
+$line-height-md: convertPxToREM(24);

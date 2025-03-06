@@ -12,13 +12,19 @@
 		"preview": "vite preview",
 		"build-storybook": "storybook build",
 		"storybook": "storybook dev -p 6006",
-		"test:unit": "vitest --root ."
+		"test:unit": "vitest --root .",
+		"lint:scss": "stylelint 'src/**/*.scss'"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"sass": "^1.85.1",
 		"storybook": "^8.6.3",
+		"stylelint": "^16.15.0",
+		"stylelint-config-standard": "^37.0.0",
+		"stylelint-config-standard-scss": "^14.0.0",
+		"stylelint-order": "^6.0.4",
+		"stylelint-scss": "^6.11.1",
 		"vite-plugin-svgr": "^4.3.0"
 	},
 	"devDependencies": {

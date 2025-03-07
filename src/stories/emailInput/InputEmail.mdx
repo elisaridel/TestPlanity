@@ -1,0 +1,49 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks'
+
+import * as InputEmail from "./InputEmail.stories.tsx"
+
+<Meta
+	component={InputEmail}
+	parameters={{
+		controls: { hideNoControlsWarning: true },
+		actions: { argTypesRegex: '^on.*' },
+	}}
+/>
+
+# InputEmail
+
+- [Description](#description)
+- [Props](#props)
+- [Variants](#variants)
+        - [`Success`](#success)
+        - [`Disabled`](#disabled)
+        - [`Error`](#error)
+        - [`Big`](#big)
+
+## Description
+
+The InputEmail component is a text field for emails. It uses the email type to enable browser validation. It provides a hint text as well as an information icon that can receive a callback function. The size can also be changed through the props "size".
+
+<Canvas of={InputEmail.Default} />
+
+## Props
+
+<Controls of={InputEmail.Default} />
+
+## Variants
+
+### `Success`
+
+<Canvas of={InputEmail.Success} />
+
+### `Disabled`
+
+<Canvas of={InputEmail.Disabled} />
+
+### `Error`
+
+<Canvas of={InputEmail.Error} />
+
+### `Big`
+
+<Canvas of={InputEmail.Big} />

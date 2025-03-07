@@ -6,7 +6,6 @@ import { expect, userEvent, within } from '@storybook/test'
 
 const meta: Meta<typeof EmailInput> = {
 	component: EmailInput,
-	tags: ['autodoc'],
 }
 
 export default meta

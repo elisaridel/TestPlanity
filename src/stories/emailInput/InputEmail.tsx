@@ -8,6 +8,7 @@ import {
 } from './types'
 
 import IconMail from '../../assets/icons/icon-mail.svg?react'
+import IconInformation from '../../assets/icons/icon-information.svg?react'
 
 export const EmailInput: EmailInputComponent = ({
 	children,
@@ -35,11 +36,24 @@ export const EmailInput: EmailInputComponent = ({
 	)
 }
 
-EmailInput.Field = (props: EmailFieldProps) => {
+EmailInput.Field = ({
+	informationCallback,
+	...inputProps
+}: EmailFieldProps) => {
 	return (
 		<div className="input-email__field-container">
-			<IconMail className="input-email__icon" />
-			<input className="input-email__field" type="email" {...props} />
+			<IconMail className="input-email__icon input-email__icon--mail" />
+			<input
+				className="input-email__field"
+				type="email"
+				{...inputProps}
+			/>
+			{informationCallback && (
+				<IconInformation
+					className="input-email__icon input-email__icon--information"
+					onClick={informationCallback}
+				/>
+			)}
 		</div>
 	)
 }

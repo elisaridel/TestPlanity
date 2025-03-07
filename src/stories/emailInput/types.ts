@@ -27,6 +27,7 @@ export type EmailFieldProps = {
 	value: string
 	required?: boolean
 	disabled?: boolean
+	informationCallback?: () => void
 }
 
 export type EmailLabelProps = {

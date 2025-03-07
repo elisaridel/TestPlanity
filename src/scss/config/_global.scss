@@ -1,0 +1,5 @@
+@use './functions' as *;
+
+.medium-wrapper {
+	max-width: convertPxToREM(389);
+}

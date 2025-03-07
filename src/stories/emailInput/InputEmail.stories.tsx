@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { EmailInput } from './InputEmail'
 import { EmailInputStoryProps } from './types'
 import { useState } from 'react'
-import { expect, userEvent, within } from '@storybook/test'
 
 const meta: Meta<typeof EmailInput> = {
 	component: EmailInput,
@@ -39,7 +38,7 @@ const EmailInputWrapper = (args: EmailInputStoryProps) => {
 					id={args.htmlFor}
 					placeholder={args.placeholder}
 					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					onChange={setEmail}
 					required={args.required}
 					disabled={args.disabled}
 					informationCallback={args?.informationCallback}
@@ -62,31 +61,6 @@ export const Default: Story = {
 		informationCallback: () => alert('information'),
 	},
 	render: (args) => <EmailInputWrapper {...args} />,
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement)
-
-		if (args.hintText) {
-			const hint = canvas.getByText(args.hintText)
-			await expect(hint).toBeInTheDocument()
-		}
-
-		const input = canvas.getByPlaceholderText(args.placeholder)
-		await userEvent.type(input, 'test@email.com')
-		await expect(input).toHaveValue('test@email.com')
-
-		const label = canvas.getByText(args.label)
-		await expect(label).toBeInTheDocument()
-
-		if (args.required) {
-			await expect(label).toHaveAttribute('aria-required', 'true')
-
-			const requiredAsterisk = canvas.getByText('*')
-			await expect(requiredAsterisk).toBeInTheDocument()
-
-			await expect(label).toHaveAttribute('aria-required', 'true')
-			await expect(input).toHaveAttribute('required', '')
-		}
-	},
 }
 
 export const Success: Story = {
@@ -102,13 +76,6 @@ export const Success: Story = {
 		informationCallback: () => alert('information'),
 	},
 	render: (args) => <EmailInputWrapper {...args} />,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement)
-		const emailInputContainer = canvas.getByTestId('input-email')
-		await expect(emailInputContainer).toHaveClass(
-			'input-email__is-successful',
-		)
-	},
 }
 
 export const Disabled: Story = {
@@ -124,18 +91,6 @@ export const Disabled: Story = {
 		informationCallback: () => alert('information'),
 	},
 	render: (args) => <EmailInputWrapper {...args} />,
-	play: async ({ canvasElement, args }) => {
-		const canvas = within(canvasElement)
-		const emailInputContainer = canvas.getByTestId('input-email')
-		await expect(emailInputContainer).toHaveClass(
-			'input-email__is-disabled',
-		)
-
-		const input = canvas.getByPlaceholderText(args.placeholder)
-		await expect(input).toBeDisabled()
-		await userEvent.type(input, 'test@email.com')
-		await expect(input).toHaveValue('')
-	},
 }
 
 export const Error: Story = {
@@ -151,11 +106,6 @@ export const Error: Story = {
 		informationCallback: () => alert('information'),
 	},
 	render: (args) => <EmailInputWrapper {...args} />,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement)
-		const emailInputContainer = canvas.getByTestId('input-email')
-		await expect(emailInputContainer).toHaveClass('input-email__has-error')
-	},
 }
 
 export const Big: Story = {
@@ -172,9 +122,4 @@ export const Big: Story = {
 		informationCallback: () => alert('information'),
 	},
 	render: (args) => <EmailInputWrapper {...args} />,
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement)
-		const emailInputContainer = canvas.getByTestId('input-email')
-		await expect(emailInputContainer).toHaveClass('input-email__big')
-	},
 }

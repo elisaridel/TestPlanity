@@ -1,4 +1,4 @@
-import { cn } from '../../utils'
+import { cn } from '../../utils/functions'
 import './index.scss'
 import {
 	EmailFieldProps,
@@ -38,6 +38,8 @@ export const EmailInput: EmailInputComponent = ({
 
 EmailInput.Field = ({
 	informationCallback,
+	onChange,
+	required,
 	...inputProps
 }: EmailFieldProps) => {
 	return (
@@ -47,6 +49,9 @@ EmailInput.Field = ({
 				className="input-email__field"
 				type="email"
 				{...inputProps}
+				onChange={(e) => onChange(e.target.value)}
+				aria-required={required}
+				required={required}
 			/>
 			{informationCallback && (
 				<IconInformation
@@ -60,11 +65,7 @@ EmailInput.Field = ({
 
 EmailInput.Label = ({ htmlFor, label, required }: EmailLabelProps) => {
 	return (
-		<label
-			className="input-email__label"
-			htmlFor={htmlFor}
-			aria-required={required}
-		>
+		<label className="input-email__label" htmlFor={htmlFor}>
 			{label}{' '}
 			{required && <span className="input-email__label-required">*</span>}
 		</label>

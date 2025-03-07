@@ -37,7 +37,6 @@
 		"@storybook/experimental-addon-test": "^8.6.3",
 		"@storybook/react": "^8.6.3",
 		"@storybook/react-vite": "^8.6.3",
-		"@storybook/test": "^8.6.3",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.0.1",
 		"@testing-library/user-event": "^14.5.2",

@@ -1074,7 +1074,7 @@
     "@storybook/react-dom-shim" "8.6.3"
     "@storybook/theming" "8.6.3"
 
-"@storybook/test@8.6.3", "@storybook/test@^8.6.3":
+"@storybook/test@8.6.3":
   version "8.6.3"
   resolved "https://registry.yarnpkg.com/@storybook/test/-/test-8.6.3.tgz#bff2d4e058e7385de3f7f8310dd79e39d968183b"
   integrity sha512-UimvhV/PmYoXCwIbGpkyqQfMhjdH2GaHJbV6BWr7M7BHA3kUS6zYJAm2V2CC5SYcmyj7FejLB4tgL7FmLXB6hA==

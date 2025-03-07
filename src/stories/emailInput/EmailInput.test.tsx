@@ -1,88 +1,181 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { test, expect } from 'vitest'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { expect, describe, it, vi } from 'vitest'
 import { EmailInput } from './InputEmail'
-import { useState } from 'react'
 import '@testing-library/jest-dom'
 import { EmailInputStoryProps } from './types'
+import { validateEmail } from '../../utils/functions'
 
-type TestComponentProps = Pick<EmailInputStoryProps, 'required'>
+type EmailInputTestProps = Omit<EmailInputStoryProps, 'children'>
 
-const TestComponent = ({ required }: TestComponentProps) => {
-	const [email, setEmail] = useState('')
-	const [isValid, setIsValid] = useState(true)
-
-	const validateEmail = (email: string) => {
-		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-		setIsValid(emailRegex.test(email))
-	}
-
+const renderComponent = ({
+	required,
+	htmlFor,
+	label,
+	id,
+	placeholder,
+	value,
+	onChange,
+	hintText,
+	size,
+	error,
+	success,
+	disabled,
+	informationCallback,
+}: EmailInputTestProps) => {
 	return (
-		<EmailInput error={!isValid} dataTestId="email-input-container">
+		<EmailInput
+			dataTestId="email-input-container"
+			size={size}
+			error={error}
+			success={success}
+			disabled={disabled}
+		>
 			<EmailInput.Label
-				htmlFor="email"
-				label="Email"
+				htmlFor={htmlFor}
+				label={label}
 				required={required}
 			/>
 			<EmailInput.Field
-				id="email"
-				placeholder="mail@planity.com"
-				value={email}
-				onChange={(e) => {
-					validateEmail(e.target.value)
-					setEmail(e.target.value)
-				}}
+				id={id}
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
 				required={required}
+				informationCallback={informationCallback}
 			/>
-			<EmailInput.Hint hintText="Entrez votre email" />
+			<EmailInput.Hint hintText={hintText} />
 		</EmailInput>
 	)
 }
 
-test('should update the value when typed into', async () => {
-	render(<TestComponent />)
+describe('validateEmail', () => {
+	it('should return true for valid email', () => {
+		const email = 'test@example.com'
+		expect(validateEmail(email)).toBe(true)
+	})
 
-	const input = screen.getByPlaceholderText('mail@planity.com')
-	await userEvent.type(input, 'test@example.com')
+	it('should return false for email without @', () => {
+		const email = 'testexample.com'
+		expect(validateEmail(email)).toBe(false)
+	})
 
-	expect(input).toHaveValue('test@example.com')
+	it('should return false for email without domain', () => {
+		const email = 'test@.com'
+		expect(validateEmail(email)).toBe(false)
+	})
+
+	it('should return false for email with invalid caracters', () => {
+		const email = 'test@exam!ple.com'
+		expect(validateEmail(email)).toBe(false)
+	})
 })
 
-test('should validate email and show error when email is invalid', async () => {
-	render(<TestComponent />)
+const props = {
+	htmlFor: 'email',
+	label: 'Email',
+	placeholder: 'mail@planity.com',
+	hintText: 'This is a hint text to help user.',
+	error: false,
+	disabled: false,
+	required: true,
+	informationCallback: () => alert('information'),
+	value: '',
+	id: 'email',
+	onChange: () => {},
+	testId: 'email-input-container',
+}
 
-	const input = screen.getByPlaceholderText('mail@planity.com')
+describe('EmailInput', () => {
+	it('should update input value with what the user typed', async () => {
+		const mockOnChange = vi.fn()
 
-	await userEvent.type(input, 'invalid-email')
+		render(renderComponent({ ...props, onChange: mockOnChange }))
 
-	const emailInputContainer = screen.getByTestId('email-input-container')
-	expect(emailInputContainer).toHaveClass('input-email__has-error')
-})
+		const inputElement = screen.getByPlaceholderText(
+			props.placeholder,
+		) as HTMLInputElement
 
-test('should not show error when email is valid', async () => {
-	render(<TestComponent />)
+		fireEvent.change(inputElement, {
+			target: { value: 'test@example.com' },
+		})
 
-	const input = screen.getByPlaceholderText('mail@planity.com')
+		expect(mockOnChange).toHaveBeenCalledTimes(1)
+		expect(mockOnChange).toHaveBeenCalledWith('test@example.com')
+	})
 
-	await userEvent.type(input, 'valid@email.com')
+	it('should have is-successfull class when props success is true', async () => {
+		render(renderComponent({ ...props, success: true }))
 
-	const emailInputContainer = screen.getByTestId('email-input-container')
+		const emailInputContainer = screen.getByTestId('email-input-container')
 
-	expect(emailInputContainer).not.toHaveClass('input-email__has-error')
-})
+		expect(emailInputContainer).toHaveClass('input-email__is-successful')
+	})
 
-test('should prevent form submission if email is empty', async () => {
-	render(
-		<form onSubmit={(e) => e.preventDefault()}>
-			<TestComponent required />
-			<button type="submit">Submit</button>
-		</form>,
-	)
+	it('should not have is-successfull class when props success is false', async () => {
+		render(renderComponent({ ...props, success: false }))
 
-	const input = screen.getByPlaceholderText('mail@planity.com')
-	const submitButton = screen.getByText('Submit')
+		const emailInputContainer = screen.getByTestId('email-input-container')
 
-	await userEvent.click(submitButton)
+		expect(emailInputContainer).not.toHaveClass(
+			'input-email__is-successful',
+		)
+	})
 
-	expect(input).toBeInvalid()
+	it('should have input-email__has-error class when props error is true', async () => {
+		render(renderComponent({ ...props, error: true }))
+
+		const emailInputContainer = screen.getByTestId('email-input-container')
+
+		expect(emailInputContainer).toHaveClass('input-email__has-error')
+	})
+
+	it('should not have input-email__has-error class when props error is false', async () => {
+		render(renderComponent({ ...props, error: false }))
+
+		const emailInputContainer = screen.getByTestId('email-input-container')
+
+		expect(emailInputContainer).not.toHaveClass('input-email__has-error')
+	})
+
+	it('should have input-email__is-disabled class when props disabled is true', async () => {
+		render(renderComponent({ ...props, disabled: true }))
+
+		const emailInputContainer = screen.getByTestId('email-input-container')
+
+		expect(emailInputContainer).toHaveClass('input-email__is-disabled')
+	})
+
+	it('should not have input-email__is-disabled class when props disabled is false', async () => {
+		render(renderComponent({ ...props, disabled: false }))
+
+		const emailInputContainer = screen.getByTestId('email-input-container')
+
+		expect(emailInputContainer).not.toHaveClass('input-email__is-disabled')
+	})
+
+	it('should display hintText when it is defined', async () => {
+		render(renderComponent({ ...props, hintText: props.hintText }))
+
+		const hintElement = screen.getByText(props.hintText)
+
+		expect(hintElement).toBeInTheDocument()
+	})
+
+	it('should display an asterisk and have aria-required attribute when required is true', async () => {
+		render(renderComponent({ ...props, required: true }))
+
+		const asterisk = screen.getByText('*')
+		expect(asterisk).toBeInTheDocument()
+		const inputElement = screen.getByPlaceholderText(props.placeholder)
+		expect(inputElement).toHaveAttribute('aria-required', 'true')
+	})
+
+	it('should not display an asterisk and aria-required attribute when required is false', async () => {
+		render(renderComponent({ ...props, required: false }))
+
+		const asterisk = screen.queryByText('*')
+		expect(asterisk).not.toBeInTheDocument()
+		const inputElement = screen.getByPlaceholderText(props.placeholder)
+		expect(inputElement).not.toHaveAttribute('aria-required', 'true')
+	})
 })

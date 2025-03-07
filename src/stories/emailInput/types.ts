@@ -23,7 +23,7 @@ export type EmailInputComponent = React.FC<EmailInputProps> & {
 export type EmailFieldProps = {
 	id: string
 	placeholder: string
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	onChange: (value: string) => void
 	value: string
 	required?: boolean
 	disabled?: boolean

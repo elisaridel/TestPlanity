@@ -1,7 +1,3 @@
-export function setColorScheme(scheme: string) {
-	document.documentElement.style.setProperty('color-scheme', scheme)
-}
-
 export function cn(
 	baseClassName: string = '',
 	additionalClassNames: Record<string, boolean> = {},
@@ -34,3 +30,9 @@ export function cn(
 
 	return classNames
 }
+
+export function validateEmail(email: string) {
+	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+	return emailRegex.test(email)
+}
+

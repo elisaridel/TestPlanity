@@ -1,12 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { EmailInput } from './components/emailInput/InputEmail'
 import './scss/style.scss'
+import {
+  initializeTheme,
+  toggleDarkMode,
+} from './libs/themeHandler/themeHandler'
 
 function App() {
   const [value, setValue] = useState('')
 
+  useEffect(() => {
+    initializeTheme()
+  }, [])
+
   return (
     <div className="page-wrapper">
+      <button onClick={() => toggleDarkMode()}>Toggle darkmode</button>
       <div className="medium-wrapper">
         <EmailInput>
           <EmailInput.Label htmlFor="email" label="Email" required />

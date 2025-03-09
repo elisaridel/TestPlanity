@@ -1,4 +1,4 @@
-import { cn } from '../../utils/functions'
+import { cn } from '../../libs/functions'
 import './index.scss'
 import {
 	EmailFieldProps,

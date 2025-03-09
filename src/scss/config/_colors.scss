@@ -52,65 +52,62 @@ $color-dark-shadow-xs: #0a0d120d;
 $color-light-shadow-xs: #0a0d120d;
 
 :root {
-	color-scheme: light dark;
+  color-scheme: light dark;
 
-	--text-primary: #{light-dark($color-dark-primary, $color-light-primary)};
-	--text-secondary: #{light-dark(
-			$color-dark-secondary,
-			$color-light-secondary
-		)};
-	--text-tertiary: #{light-dark($color-dark-tertiary, $color-light-tertiary)};
-	--text-brand-primary: #{light-dark($color-dark-brand, $color-light-brand)};
-	--text-placeholder: #{light-dark(
-			$color-dark-placeholder,
-			$color-light-placeholder
-		)};
-	--text-error-primary: #{light-dark(
-			$color-dark-error-primary,
-			$color-light-error-primary
-		)};
-	--text-disabled: #{light-dark($color-dark-disabled, $color-light-disabled)};
+  --text-primary: #{light-dark($color-dark-primary, $color-light-primary)};
+  --text-secondary: #{light-dark($color-dark-secondary, $color-light-secondary)};
+  --text-tertiary: #{light-dark($color-dark-tertiary, $color-light-tertiary)};
+  --text-brand-primary: #{light-dark($color-dark-brand, $color-light-brand)};
+  --text-placeholder: #{light-dark(
+      $color-dark-placeholder,
+      $color-light-placeholder
+    )};
+  --text-error-primary: #{light-dark(
+      $color-dark-error-primary,
+      $color-light-error-primary
+    )};
+  --text-disabled: #{light-dark($color-dark-disabled, $color-light-disabled)};
 
-	--fg-tertiary: #{light-dark(
-			$color-dark-fg-tertiary,
-			$color-light-fg-tertiary
-		)};
-	--fg-quinary: #{light-dark($color-dark-fg-quinary, $color-light-fg-quinary)};
-	--fg-error-primary: #{light-dark(
-			$color-dark-fg-error-primary,
-			$color-light-fg-error-primary
-		)};
+  --fg-tertiary: #{light-dark(
+      $color-dark-fg-tertiary,
+      $color-light-fg-tertiary
+    )};
+  --fg-quinary: #{light-dark($color-dark-fg-quinary, $color-light-fg-quinary)};
+  --fg-error-primary: #{light-dark(
+      $color-dark-fg-error-primary,
+      $color-light-fg-error-primary
+    )};
 
-	--bg-primary: #{light-dark($color-dark-bg-primary, $color-light-bg-primary)};
-	--bg-disabled: #{light-dark(
-			$color-dark-bg-disabled,
-			$color-light-bg-disabled
-		)};
+  --bg-primary: #{light-dark($color-dark-bg-primary, $color-light-bg-primary)};
+  --bg-disabled: #{light-dark(
+      $color-dark-bg-disabled,
+      $color-light-bg-disabled
+    )};
 
-	--border-primary: #{light-dark(
-			$color-dark-border-primary,
-			$color-light-border-primary
-		)};
-	--border-brand: #{light-dark(
-			$color-dark-border-brand,
-			$color-light-border-brand
-		)};
-	--border-disabled: #{light-dark(
-			$color-dark-border-disabled,
-			$color-light-border-disabled
-		)};
-	--border-error: #{light-dark(
-			$color-dark-border-error,
-			$color-light-border-error
-		)};
+  --border-primary: #{light-dark(
+      $color-dark-border-primary,
+      $color-light-border-primary
+    )};
+  --border-brand: #{light-dark(
+      $color-dark-border-brand,
+      $color-light-border-brand
+    )};
+  --border-disabled: #{light-dark(
+      $color-dark-border-disabled,
+      $color-light-border-disabled
+    )};
+  --border-error: #{light-dark(
+      $color-dark-border-error,
+      $color-light-border-error
+    )};
 
-	--shadow-xs: #{light-dark($color-dark-shadow-xs, $color-light-shadow-xs)};
+  --shadow-xs: #{light-dark($color-dark-shadow-xs, $color-light-shadow-xs)};
 
-	&:has(input[name='color-scheme'][value='light']:checked) {
-		color-scheme: light;
-	}
+  &:has(input[name='color-scheme'][value='light']:checked) {
+    color-scheme: light;
+  }
 
-	&:has(input[name='color-scheme'][value='dark']:checked) {
-		color-scheme: dark;
-	}
+  &:has(input[name='color-scheme'][value='dark']:checked) {
+    color-scheme: dark;
+  }
 }

@@ -5,53 +5,53 @@
 /* stylelint-disable selector-max-type */
 
 @mixin reset {
-	* {
-		box-sizing: border-box;
-	}
+  * {
+    box-sizing: border-box;
+  }
 
-	html,
-	body {
-		padding: 0;
-		margin: 0;
-		font-family: $font-family-body;
-	}
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: $font-family-body;
+  }
 
-	button {
-		padding: 0;
-		margin: 0;
-		border: none;
-		background: none;
-		appearance: none;
-	}
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    appearance: none;
+  }
 
-	input,
-	textarea {
-		padding: 0;
-		margin: 0;
-		border: none;
-		background: none;
-		outline: none;
-		appearance: none;
-		resize: none;
-	}
+  input,
+  textarea {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    outline: none;
+    appearance: none;
+    resize: none;
+  }
 
-	a {
-		all: unset;
-	}
+  a {
+    all: unset;
+  }
 
-	ol,
-	ul,
-	li {
-		padding: 0;
-		margin: 0;
-		list-style-type: none;
-	}
+  ol,
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
 
-	h1,
-	h2,
-	h3,
-	h4,
-	p {
-		margin: 0;
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
 }

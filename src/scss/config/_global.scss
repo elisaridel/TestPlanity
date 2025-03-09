@@ -1,5 +1,12 @@
 @use './functions' as *;
 
 .medium-wrapper {
-	max-width: convertPxToREM(389);
+  max-width: convertPxToREM(389);
+}
+
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
 }

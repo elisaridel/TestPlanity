@@ -1,5 +1,5 @@
 @use 'sass:math';
 
 @function convertPxToREM($value: 16) {
-	@return #{math.div($value, 16)}rem;
+  @return #{math.div($value, 16)}rem;
 }
